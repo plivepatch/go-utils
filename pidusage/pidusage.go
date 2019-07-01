@@ -42,6 +42,7 @@ func wrapper(statType string) func(pid int) (*SysInfo, error) {
         return stat(pid, statType)
     }
 }
+
 func init() {
     platform = runtime.GOOS
     if eol = "\n"; strings.Index(platform, "win") == 0 {
@@ -58,6 +59,7 @@ func init() {
     fnMap["netbsd"] = wrapper("proc")
     fnMap["win"] = wrapper("win")
 }
+
 func formatStdOut(stdout []byte, userfulIndex int) []string {
     infoArr := strings.Split(string(stdout), eol)[userfulIndex]
     ret := strings.Fields(infoArr)
